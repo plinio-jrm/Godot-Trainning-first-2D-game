@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwq2p06wgnn6m"]
+[gd_scene load_steps=6 format=3 uid="uid://cwq2p06wgnn6m"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_ug4ms"]
 [ext_resource type="PackedScene" uid="uid://dr3hw3rmtmcj0" path="res://scenes/mob.tscn" id="2_epu00"]
 [ext_resource type="PackedScene" uid="uid://mbd25hj53e5m" path="res://scenes/player.tscn" id="2_pod4b"]
+[ext_resource type="PackedScene" uid="uid://cjrhxvfyr0vr4" path="res://scenes/hud.tscn" id="4_6gp25"]
 
 [sub_resource type="Curve2D" id="Curve2D_766wf"]
 _data = {
@@ -33,7 +34,10 @@ curve = SubResource("Curve2D_766wf")
 
 [node name="MobSpawnerLocation" type="PathFollow2D" parent="MobPath"]
 
+[node name="HUD" parent="." instance=ExtResource("4_6gp25")]
+
 [connection signal="hit" from="Player" to="." method="Game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
