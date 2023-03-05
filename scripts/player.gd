@@ -1,5 +1,7 @@
 extends Area2D
 
+signal hit
+
 @export var speed: int = 400
 var screen_size
 
@@ -13,6 +15,11 @@ func _process(delta):
 	Handle_Input()
 	Movement(delta)
 	DoAnimation()
+
+func Start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
 
 func Handle_Input() -> void:
 	input_movement = Vector2.ZERO
@@ -50,3 +57,8 @@ func DoAnimation() -> void:
 	
 func HasMovement_Input() -> bool:
 	return not input_movement == Vector2.ZERO
+
+func _on_body_entered(body):
+	hide()
+	hit.emit()
+	$CollisionShape2D.set_deferred("disabled", true)
