@@ -4,11 +4,11 @@ extends Node
 var score: int
 
 func Game_over():
-	$ScoreTimer.stop()
-	$MobTimer.stop()
+	$Timers/ScoreTimer.stop()
+	$Timers/MobTimer.stop()
 	$HUD.Show_Game_Over()
-	$Music.stop()
-	$DeathSound.play()
+	$Audios/Music.stop()
+	$Audios/DeathSound.play()
 
 func new_game() -> void:
 	score = 0
@@ -18,8 +18,8 @@ func new_game() -> void:
 	$HUD.Show_Message("Get Ready")
 	
 	$Player.Start($StartPosition.position)
-	$Music.play()
-	$StartTimer.start()
+	$Audios/Music.play()
+	$Timers/StartTimer.start()
 
 
 func _on_mob_timer_timeout():
@@ -43,5 +43,5 @@ func _on_score_timer_timeout():
 	$HUD.Update_Score(score)
 
 func _on_start_timer_timeout():
-	$MobTimer.start()
-	$ScoreTimer.start()
+	$Timers/MobTimer.start()
+	$Timers/ScoreTimer.start()
